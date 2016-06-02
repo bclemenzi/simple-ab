@@ -42,7 +42,7 @@ String abPartnerId = "25...89e9";  // Set your unique partner key. Obtained from
 String userId = "25...89e9";  // Set a GUID to be used in creating signature key when making calls to the Academic Benchmarks API 
 
 // Init our client object
-AcademicBenchmarksClient abClient = AcademicBenchmarksClient(abPartnerKey, abPartnerId, userId);
+AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerKey, abPartnerId, userId);
 ```
 
 ```java	
@@ -52,7 +52,7 @@ String userId = "67...1234";  // Set a GUID to be used in creating signature key
 int signatureLifespanMinutes = 120; // Set the number of minutes our signature will live for.
 
 // Init our client object
-AcademicBenchmarksClient abClient = AcademicBenchmarksClient(abPartnerKey, abPartnerId, userId, signatureLifespanMinutes);
+AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerKey, abPartnerId, userId, signatureLifespanMinutes);
 ```
 
 List the Authorities available to your Academic Benchmarks API license
