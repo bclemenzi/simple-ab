@@ -239,7 +239,7 @@ for(Standard childStandardModel : childStandards)
 }
 ```
 
-Get the standards children data for a parent standard.  Loading the objects with the AbData records is a faster transaction than the List<Standard> call above.
+Get the standards children data for a parent standard.  Loading the objects with the getStandardChildredData method is a faster transaction than the getStandardChildred> call sampled above.
 
 ```java	
 // Get a standardGuid, usually from running the getTopLevelStandards method above.
