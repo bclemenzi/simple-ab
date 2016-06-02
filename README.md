@@ -37,22 +37,22 @@ Usage
 Client Options
 
 ```java	
-String abPartnerKey = "25...89e9";  // Set your unique partner identifier. Obtained from AB Support.
 String abPartnerId = "25...89e9";  // Set your unique partner key. Obtained from AB Support.
+String abPartnerKey = "25...89e9";  // Set your unique partner identifier. Obtained from AB Support.
 String userId = "25...89e9";  // Set a GUID to be used in creating signature key when making calls to the Academic Benchmarks API 
 
 // Init our client object
-AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerKey, abPartnerId, userId);
+AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerId, abPartnerKey, userId);
 ```
 
 ```java	
-String abPartnerKey = "45...89e9";  // Set your unique partner identifier. Obtained from AB Support.
 String abPartnerId = "25...r43t";  // Set your unique partner key. Obtained from AB Support.
+String abPartnerKey = "45...89e9";  // Set your unique partner identifier. Obtained from AB Support.
 String userId = "67...1234";  // Set a GUID to be used in creating signature key when making calls to the Academic Benchmarks API 
 int signatureLifespanMinutes = 120; // Set the number of minutes our signature will live for.
 
 // Init our client object
-AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerKey, abPartnerId, userId, signatureLifespanMinutes);
+AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerId, abPartnerKey, userId, signatureLifespanMinutes);
 ```
 
 List the Authorities available to your Academic Benchmarks API license
