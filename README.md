@@ -22,7 +22,7 @@ The easiest way to incorporate the library into your Java project is to use Mave
 <dependency>
     <groupId>com.nfbsoftware</groupId>
 	<artifactId>simple-ab</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 </dependency>
 ```
 
@@ -165,6 +165,45 @@ Get standard by GUID
 String standardGuid = "AEE4CB82-D9DD-11E2-87A3-00249DFF4B22";
 
 Standard standardModel = abClient.getStandard(standardGuid);
+
+if(standardModel != null)
+{
+    System.out.println("Standard Adopt Year: " + standardModel.getAdopt_year());
+    System.out.println("Standard AuthorityCode: " + standardModel.getAuthorityCode());
+    System.out.println("Standard AuthorityDescr: " + standardModel.getAuthorityDescr());
+    System.out.println("Standard AuthorityGuid: " + standardModel.getAuthorityGuid());
+    System.out.println("Standard CourseDescr: " + standardModel.getCourseDescr());
+    System.out.println("Standard CourseGuid: " + standardModel.getCourseGuid());
+    System.out.println("Standard Date Modified: " + standardModel.getDate_modified());
+    System.out.println("Standard Deepest: " + standardModel.getDeepest());
+    System.out.println("Standard Description: " + standardModel.getDescr());
+    System.out.println("Standard DocumentGuid: " + standardModel.getDocumentGuid());
+    System.out.println("Standard DocumentTitle: " + standardModel.getDocumentTitle());
+    System.out.println("Standard Extended Description: " + standardModel.getExtended_descr());
+    System.out.println("Standard GUID: " + standardModel.getGuid());
+    System.out.println("Standard Label: " + standardModel.getLabel());
+    System.out.println("Standard Level: " + standardModel.getLevel());
+    System.out.println("Standard Number: " + standardModel.getNumber());
+    System.out.println("Standard Placeholder: " + standardModel.getPlaceholder());
+    System.out.println("Standard Self: " + standardModel.getSelf());
+    System.out.println("Standard Seq: " + standardModel.getSeq());
+    System.out.println("Standard Status: " + standardModel.getStatus());
+    System.out.println("Standard Stem: " + standardModel.getStem());
+    System.out.println("Standard SubjectCode: " + standardModel.getSubjectCode());
+    System.out.println("Standard SubjectDescr: " + standardModel.getSubjectDescr());
+    System.out.println("Standard SubjectDocDescr: " + standardModel.getSubjectDocDescr());
+    System.out.println("Standard SubjectDocGuid: " + standardModel.getSubjectDocGuid());
+    System.out.println("Standard Version: " + standardModel.getVersion());
+}
+```
+
+Get standard by Number
+
+```java	
+String authorityCode = "OH";
+String standardNumber = "OH.Math.Content.1.OA";
+
+Standard standardModel = abClient.getStandardByNumber(authorityCode, standardNumber);
 
 if(standardModel != null)
 {

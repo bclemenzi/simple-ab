@@ -1012,6 +1012,49 @@ public class AcademicBenchmarksClient
     
     /**
      * 
+     * @param authorityCode
+     * @param standardNumber
+     * @return
+     * @throws Exception
+     */
+    public Standard getStandardByNumber(String authorityCode, String standardNumber) throws Exception
+    {
+        Standard standardModel = null;
+        
+        String queryString = "&authority=" + authorityCode + "&number=" + standardNumber;
+        
+        String apiResponse = getApiResponse("", queryString, 0, 1);
+        
+        JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
+        AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
+        
+        Status apiStatus = restApiResponse.getStatus();
+        
+        if(apiStatus != null)
+        {
+            if(apiStatus.getCode() == 200)
+            {
+                for(AbResource tmpResource : restApiResponse.getResources())
+                {
+                    AbData tmpData = tmpResource.getData();
+                    
+                    if(tmpData != null)
+                    {
+                        standardModel = getStandard(tmpData.getGuid());
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Academic Benchmarks Error (" + apiStatus.getCode() + ") " + apiStatus.getCategory() + " - " + apiStatus.getEmsg());
+            }
+        }
+        
+        return standardModel;
+    }
+    
+    /**
+     * 
      * @param list
      * @param queryString
      * @param offset
