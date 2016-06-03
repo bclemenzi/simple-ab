@@ -1,5 +1,7 @@
 package com.nfbsoftware.ab.model;
 
+import com.nfbsoftware.util.StringUtil;
+
 /**
  * 
  * @author brendanclemenzi
@@ -217,5 +219,21 @@ public class AbData
     public void setSubject_doc(SubjectDocument subject_doc)
     {
         m_subject_doc = subject_doc;
+    }
+    
+    public String getDisplayName()
+    {
+        String displayName = "";
+        
+        if(StringUtil.isNullOrEmpty(getNumber()))
+        {
+            displayName = StringUtil.emptyIfNull(getDescr());
+        }
+        else
+        {
+            displayName = StringUtil.emptyIfNull(getNumber()) + " " + StringUtil.emptyIfNull(getDescr());
+        }
+        
+        return displayName;
     }
 }
