@@ -1054,6 +1054,29 @@ public class AcademicBenchmarksClient
     }
     
     /**
+     * Returns the FULL standard document tree from the given GUID level down
+     * 
+     * @param guid
+     * @return
+     * @throws Exception
+     */
+    public Standard getStandardDocument(Standard standardDocument) throws Exception
+    {
+        List<Standard> childStandards = getStandardChildred(standardDocument.getGuid(), 0, 100);
+        
+        for(Standard tmpStandard : childStandards)
+        {
+            // Gather any children this level of the standard may have
+            tmpStandard = getStandardDocument(tmpStandard);
+            
+            // Add the standard to the parent document
+            standardDocument.getStandards().add(tmpStandard);
+        }
+        
+        return standardDocument;
+    }
+    
+    /**
      * 
      * @param list
      * @param queryString

@@ -1,5 +1,8 @@
 package com.nfbsoftware.ab.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author brendanclemenzi
@@ -34,6 +37,8 @@ public class Standard
     private String m_subjectDocDescr;
     private String m_courseGuid;
     private String m_courseDescr;
+    
+    private List<Standard> m_standards = new ArrayList<Standard>();
 
     public String getStatus()
     {
@@ -267,5 +272,14 @@ public class Standard
     public void setExtended_descr(String extended_descr)
     {
         m_extended_descr = extended_descr;
+    }
+    
+    public List<Standard> getStandards()
+    {
+        return m_standards;
+    }
+    public void setStandards(List<Standard> standards)
+    {
+        m_standards = standards;
     }
 }

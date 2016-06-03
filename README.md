@@ -22,7 +22,7 @@ The easiest way to incorporate the library into your Java project is to use Mave
 <dependency>
     <groupId>com.nfbsoftware</groupId>
 	<artifactId>simple-ab</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 </dependency>
 ```
 
@@ -318,6 +318,37 @@ for(AbData childStandardModel : childStandardsData)
     }
     
     childCounter++;
+}
+```
+
+Get the FULL standard document tree from a given Standard object
+
+```java	
+public void testFullTreeDump() throws Exception
+{
+	String standardGuid = "AEB3064C-D9DD-11E2-87A3-00249DFF4B22";
+
+	// Get our top level standard by the GUID passed in
+	Standard standardModel = abClient.getStandard(standardGuid);
+            
+    if(standardModel != null)
+    {
+		// Request the FULL standard tree of objects
+		Standard fullStandardModel = abClient.getStandardDocument(standardModel);
+	
+		// Loop though all of the descendants by calling a private method recursively 
+		processChildren(0, fullStandardModel);
+	}
+}
+
+private void processChildren(int level, Standard standardModel)
+{
+    System.out.println((level++) + " Standard: " + standardModel.getNumber() + " Deepest: " + standardModel.getDeepest() + "  " + standardModel.getDescr());
+    
+    for(Standard childStandard : standardModel.getStandards())
+    {
+        processChildren(level, childStandard);
+    }
 }
 ```
 
