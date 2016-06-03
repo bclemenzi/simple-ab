@@ -10,6 +10,8 @@ Features
 
   * Supports Academic Benchmarks API v3
   * Supports Academic Benchmarks RESTful "standards" resource
+  * Fully implemented authentication system.  Just enter your Academic Benchmarks credentials and go!
+  * Fully constructed and inflated document trees
   * Published on Maven Central Repository
 
 Getting started
