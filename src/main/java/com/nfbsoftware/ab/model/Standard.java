@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class Standard
 {
-    private int m_level;
-    
     private String m_status;
     private String m_placeholder;
     private String m_guid;
@@ -137,15 +135,6 @@ public class Standard
     public void setLabel(String label)
     {
         m_label = label;
-    }
-    
-    public int getLevel()
-    {
-        return m_level;
-    }
-    public void setLevel(int level)
-    {
-        m_level = level;
     }
     
     public String getAuthorityGuid()
