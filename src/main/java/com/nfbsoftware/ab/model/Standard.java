@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Standard
 {
+    private String m_id;
     private String m_status;
     private String m_placeholder;
     private String m_guid;
@@ -56,6 +57,10 @@ public class Standard
         m_placeholder = placeholder;
     }
     
+    public String getId()
+    {
+        return m_guid;
+    }
     public String getGuid()
     {
         return m_guid;

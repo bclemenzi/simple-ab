@@ -8,6 +8,8 @@ import com.nfbsoftware.util.StringUtil;
  */
 public class AbData
 {
+    private String m_id;
+    
     private String m_status;
     private String m_placeholder;
     private String m_guid;
@@ -50,6 +52,10 @@ public class AbData
         m_placeholder = placeholder;
     }
     
+    public String getId()
+    {
+        return m_guid;
+    }
     public String getGuid()
     {
         return m_guid;
