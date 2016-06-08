@@ -80,11 +80,58 @@ public class AcademicBenchmarksClient
     
     /**
      * 
-     * @param offset
-     * @param limit
+     * @param authorityCode
      * @return
      * @throws Exception
      */
+    public Authority getAuthority(String authorityCode) throws Exception
+    {
+        List<Authority> authorities = new ArrayList<Authority>();
+        
+        String queryString = "&authority=" + authorityCode;
+        
+        String apiResponse = getApiResponse("authority", queryString, 0, 1);
+        
+        JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
+        AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
+        
+        Status apiStatus = restApiResponse.getStatus();
+        
+        if(apiStatus != null)
+        {
+            if(apiStatus.getCode() == 200)
+            {
+                for(AbResource tmpResource : restApiResponse.getResources())
+                {
+                    AbData tmpData = tmpResource.getData();
+                    
+                    if(tmpData != null)
+                    {
+                        Authority tmpAuthority = tmpData.getAuthority();
+                        
+                        if(tmpAuthority != null)
+                        {
+                            authorities.add(tmpAuthority);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Academic Benchmarks Error (" + apiStatus.getCode() + ") " + apiStatus.getCategory() + " - " + apiStatus.getEmsg());
+            }
+        }
+        
+        if(authorities.size() == 1)
+        {
+            return authorities.get(0);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
     public List<Authority> getAuthorities(int offset, int limit) throws Exception
     {
         List<Authority> authorities = new ArrayList<Authority>();
@@ -818,6 +865,7 @@ public class AcademicBenchmarksClient
                     
                     if(tmpData != null)
                     {
+                        System.out.println("GUID: " + tmpData.getGuid() + "  Level: " + tmpData.getLevel() + "  Descr: " + tmpData.getDescr());
                         if(tmpData.getLevel() == 1)
                         {
                             standards.add(tmpData);

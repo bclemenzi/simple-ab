@@ -24,7 +24,7 @@ The easiest way to incorporate the library into your Java project is to use Mave
 <dependency>
     <groupId>com.nfbsoftware</groupId>
 	<artifactId>simple-ab</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 </dependency>
 ```
 
@@ -69,6 +69,21 @@ for(Authority tmpModel : authorities)
 	System.out.println("Authority GUID: " + tmpModel.getGuid());
 	System.out.println("Authority Code: " + tmpModel.getCode());
 	System.out.println("Authority Description: " + tmpModel.getDescr());
+}
+```
+
+Get Authority object by code
+
+```java	
+String authorityCode = "OH";
+Authority authorityModel = abClient.getAuthority(authorityCode);
+
+// Loop through the returned Authorities
+if(authorityModel != null)
+{
+	System.out.println("Authority GUID: " + authorityModel.getGuid());
+	System.out.println("Authority Code: " + authorityModel.getCode());
+	System.out.println("Authority Description: " + authorityModel.getDescr());
 }
 ```
 
