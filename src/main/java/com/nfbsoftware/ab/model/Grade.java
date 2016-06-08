@@ -1,11 +1,15 @@
 package com.nfbsoftware.ab.model;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author brendanclemenzi
  */
-public class Grade
+public class Grade implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     private String m_code;
     private String m_lo;
     private String m_hi;

@@ -1,13 +1,17 @@
 package com.nfbsoftware.ab.model;
 
+import java.io.Serializable;
+
 
 
 /**
  * 
  * @author brendanclemenzi
  */
-public class Status
+public class Status implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     private String m_imsg;
     private String m_emsg;
     private String m_category;

@@ -1,13 +1,17 @@
 package com.nfbsoftware.ab.model;
 
+import java.io.Serializable;
+
 import com.nfbsoftware.util.StringUtil;
 
 /**
  * 
  * @author brendanclemenzi
  */
-public class AbData
+public class AbData implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     private String m_id;
     
     private String m_status;

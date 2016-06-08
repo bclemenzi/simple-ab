@@ -1,5 +1,6 @@
 package com.nfbsoftware.ab.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import java.util.List;
  * 
  * @author brendanclemenzi
  */
-public class Standard
+public class Standard implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     private String m_id;
     private String m_status;
     private String m_placeholder;

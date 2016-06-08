@@ -1,11 +1,15 @@
 package com.nfbsoftware.ab.model;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author brendanclemenzi
  */
-public class Authority
+public class Authority implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     private String m_guid;
     private String m_descr;
     private String m_code;

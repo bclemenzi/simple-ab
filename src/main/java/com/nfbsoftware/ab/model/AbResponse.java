@@ -1,5 +1,6 @@
 package com.nfbsoftware.ab.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import java.util.List;
  * 
  * @author brendanclemenzi
  */
-public class AbResponse
+public class AbResponse implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
     private String m_type;
     private String m_first;
     private String m_previous;
