@@ -57,7 +57,7 @@ int signatureLifespanMinutes = 120; // Set the number of minutes our signature w
 AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerId, abPartnerKey, userId, signatureLifespanMinutes);
 ```
 
-List the Authorities available to your Academic Benchmarks API license
+**List the Authorities available to your Academic Benchmarks API license**
 
 ```java	
 // Get a paged list (first 10) of the Authorities available to you.
@@ -72,7 +72,7 @@ for(Authority tmpModel : authorities)
 }
 ```
 
-Get Authority object by code
+**Get Authority object by code**
 
 ```java	
 String authorityCode = "OH";
@@ -87,7 +87,7 @@ if(authorityModel != null)
 }
 ```
 
-List the Subjects available to your Academic Benchmarks API license
+**List the Subjects available to your Academic Benchmarks API license**
 
 ```java	
 // Get a paged list (first 10) of the Subjects available to you.
@@ -101,7 +101,7 @@ for(Subject tmpModel : subjects)
 }
 ```
 
-List the Documents available for a given Authority
+**List the Documents available for a given Authority**
 
 ```java	
 // Get an authorityCode, usually from running the getAuthorities method above.
@@ -118,7 +118,7 @@ for(Document tmpModel : documents)
 }
 ```
 
-List the Subject Documents available for a given Authority and Document
+**List the Subject Documents available for a given Authority and Document**
 
 ```java	
 // Get an authorityCode and documentGuid, usually from running the getAuthorities and getDocumentsByAuthority methods above.
@@ -136,7 +136,7 @@ for(SubjectDocument tmpModel : subjectDocuments)
 }
 ```
 
-List the Courses available for a given Authority, Document, and Subject Document
+**List the Courses available for a given Authority, Document, and Subject Document**
 
 ```java	
 // Get an authorityCode and documentGuid, usually from running the getAuthorities and getDocumentsByAuthority methods above.
@@ -155,7 +155,7 @@ for(Course tmpModel : courses)
 }
 ```
 
-List the top level standards available for a given Authority, Document, Subject Document, and Course
+**List the top level standards available for a given Authority, Document, Subject Document, and Course**
 
 ```java	
 // Get an authorityCode and documentGuid, usually from running the getAuthorities and getDocumentsByAuthority methods above.
@@ -179,7 +179,7 @@ for(AbData tmpModel : standards)
 }
 ```
 
-Get standard by GUID
+**Get standard by GUID**
 
 ```java	
 // Get a standardGuid, usually from running the getTopLevelStandards method above.
@@ -218,7 +218,7 @@ if(standardModel != null)
 }
 ```
 
-Get standard by Number
+**Get standard by Number**
 
 ```java	
 String authorityCode = "OH";
@@ -257,7 +257,7 @@ if(standardModel != null)
 }
 ```
 
-Get the standards children for a parent standard
+**Get the standards children for a parent standard**
 
 ```java	
 // Get a standardGuid, usually from running the getTopLevelStandards method above.
@@ -299,7 +299,7 @@ for(Standard childStandardModel : childStandards)
 }
 ```
 
-Get the standards children data for a parent standard.  Loading the objects with the getStandardChildredData method is a faster transaction than the getStandardChildred> call sampled above.
+**Get the standards children data for a parent standard.  Loading the objects with the getStandardChildredData method is a faster transaction than the getStandardChildred> call sampled above.**
 
 ```java	
 // Get a standardGuid, usually from running the getTopLevelStandards method above.
@@ -338,7 +338,7 @@ for(AbData childStandardModel : childStandardsData)
 }
 ```
 
-Get the FULL standard document tree from a given Standard object
+**Get the FULL standard document tree from a given Standard object**
 
 ```java	
 public void testFullTreeDump() throws Exception
