@@ -49,7 +49,7 @@ String userId = "25...89e9";  // Set a GUID to be used in creating signature key
 AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerId, abPartnerKey, userId);
 ```
 
-**.OR. Client Option with custom signature lifespan**
+**Client Option with custom signature lifespan setting**
 
 ```java	
 String abPartnerId = "25...r43t";  // Set your unique partner key. Obtained from AB Support.
