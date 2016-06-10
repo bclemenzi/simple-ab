@@ -63,6 +63,7 @@ AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerId, ab
 
 Library Functions
 -----
+The current set of function were designed to allow a developer to mimic the functionality of the search system found online: [AB Search](http://www.academicbenchmarks.org/search/)
 
 **List the Authorities available to your Academic Benchmarks API license**
 
