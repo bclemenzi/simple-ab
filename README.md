@@ -38,7 +38,7 @@ Usage
 -----
 Below you will find a number of basic examples to guide you through the use of the Java library.
 
-**Basic Client Options**
+**Basic Client Option**
 
 ```java	
 String abPartnerId = "25...89e9";  // Set your unique partner key. Obtained from AB Support.
@@ -60,6 +60,9 @@ int signatureLifespanMinutes = 120; // Set the number of minutes our signature w
 // Init our client object
 AcademicBenchmarksClient abClient = new AcademicBenchmarksClient(abPartnerId, abPartnerKey, userId, signatureLifespanMinutes);
 ```
+
+Library Functions
+-----
 
 **List the Authorities available to your Academic Benchmarks API license**
 
