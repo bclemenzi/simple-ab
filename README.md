@@ -36,7 +36,9 @@ some money, or by [signing up for a sandbox account](http://docs.academicbenchma
 
 Usage
 -----
-Client Options
+Below you will find a number of basic examples to guide you through the use of the Java library.
+
+**Basic Client Options**
 
 ```java	
 String abPartnerId = "25...89e9";  // Set your unique partner key. Obtained from AB Support.
