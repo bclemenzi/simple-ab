@@ -865,11 +865,7 @@ public class AcademicBenchmarksClient
                     
                     if(tmpData != null)
                     {
-                        System.out.println("GUID: " + tmpData.getGuid() + "  Level: " + tmpData.getLevel() + "  Descr: " + tmpData.getDescr());
-                        if(tmpData.getLevel() == 1)
-                        {
-                            standards.add(tmpData);
-                        }
+                        standards.add(tmpData);
                     }
                 }
             }
@@ -883,6 +879,7 @@ public class AcademicBenchmarksClient
     }
     
     /**
+     * Will return domain records with a Level value of 1
      * 
      * @param authorityCode
      * @param documentGuid
@@ -917,7 +914,6 @@ public class AcademicBenchmarksClient
                     
                     if(tmpData != null)
                     {
-                        System.out.println("GUID: " + tmpData.getGuid() + "  Level: " + tmpData.getLevel() + "  Descr: " + tmpData.getDescr());
                         if(tmpData.getLevel() == 1)
                         {
                             standards.add(tmpData);

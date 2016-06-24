@@ -24,7 +24,7 @@ The easiest way to incorporate the library into your Java project is to use Mave
 <dependency>
     <groupId>com.nfbsoftware</groupId>
 	<artifactId>simple-ab</artifactId>
-	<version>1.0.9</version>
+	<version>1.0.10</version>
 </dependency>
 ```
 
@@ -160,6 +160,30 @@ for(Course tmpModel : courses)
 {
     System.out.println("Course GUID: " + tmpModel.getGuid());
     System.out.println("Course Description: " + tmpModel.getDescr());
+}
+```
+
+**List the domains available for a given Authority, Document, Subject Document, and Course**
+
+```java	
+// Get an authorityCode and documentGuid, usually from running the getAuthorities and getDocumentsByAuthority methods above.
+String authorityCode = "OH";
+String documentGuid = "E1D5D8B6-DA22-11E2-95B3-3B359DFF4B22";
+String subjectDocGuid = "E1C6ECD4-DA22-11E2-95B3-3B359DFF4B22";
+String courseGuid = "E1743C5A-DA22-11E2-95B3-3B359DFF4B22";
+
+// Get a paged list (first 10) of the Standards available.
+List<AbData> standards = abClient.getDomains(authorityCode, documentGuid, subjectDocGuid, courseGuid, 0, 10);
+
+// Loop through the returned Courses
+for(AbData tmpModel : standards)
+{
+    System.out.println("AbData GUID (standard GUID): " + tmpModel.getGuid());
+    System.out.println("AbData Number: " + tmpModel.getNumber());
+    System.out.println("AbData Description: " + tmpModel.getDescr());
+    System.out.println("AbData Adopt Year: " + tmpModel.getAdopt_year());
+    System.out.println("AbData Level: " + tmpModel.getLevel());
+    System.out.println("AbData Self: " + tmpModel.getSelf());
 }
 ```
 
