@@ -842,13 +842,65 @@ public class AcademicBenchmarksClient
      * @return
      * @throws Exception
      */
-    public List<AbData> getTopLevelStandards(String authorityCode, String documentGuid, String subjectDocGuid, String courseGuid, int offset, int limit) throws Exception
+    public List<AbData> getDomains(String authorityCode, String documentGuid, String subjectDocGuid, String courseGuid, int offset, int limit) throws Exception
     {
         List<AbData> standards = new ArrayList<AbData>();
         
         String queryString = "&authority=" + authorityCode + "&document=" + documentGuid + "&subject_doc=" + subjectDocGuid + "&course=" + courseGuid;
         
         String apiResponse = getApiResponse("", queryString, offset, limit);
+        
+        JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
+        AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
+        
+        Status apiStatus = restApiResponse.getStatus();
+        
+        if(apiStatus != null)
+        {
+            if(apiStatus.getCode() == 200)
+            {
+                for(AbResource tmpResource : restApiResponse.getResources())
+                {
+                    AbData tmpData = tmpResource.getData();
+                    
+                    if(tmpData != null)
+                    {
+                        System.out.println("GUID: " + tmpData.getGuid() + "  Level: " + tmpData.getLevel() + "  Descr: " + tmpData.getDescr());
+                        if(tmpData.getLevel() == 1)
+                        {
+                            standards.add(tmpData);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Academic Benchmarks Error (" + apiStatus.getCode() + ") " + apiStatus.getCategory() + " - " + apiStatus.getEmsg());
+            }
+        }
+        
+        return standards;
+    }
+    
+    /**
+     * 
+     * @param authorityCode
+     * @param documentGuid
+     * @param subjectDocGuid
+     * @param courseGuid
+     * @param offset
+     * @param limit
+     * @return
+     * @throws Exception
+     */
+    public List<AbData> getTopLevelStandards(String authorityCode, String documentGuid, String subjectDocGuid, String courseGuid, int offset, int limit) throws Exception
+    {
+        List<AbData> standards = new ArrayList<AbData>();
+        
+        String fields = "guid,descr,level,number";
+        String queryString = "&authority=" + authorityCode + "&document=" + documentGuid + "&subject_doc=" + subjectDocGuid + "&course=" + courseGuid + "&deepest=N";
+        
+        String apiResponse = getApiResponse(AB_API_URL_V3, "", queryString, fields, offset, limit);
         
         JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
         AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
@@ -983,7 +1035,7 @@ public class AcademicBenchmarksClient
         
         String baseUrl = AB_API_URL_V3 + "/" + guid;
         
-        String apiResponse = getApiResponse(baseUrl, "", "", 0, 1);
+        String apiResponse = getApiResponse(baseUrl, "", "", "", 0, 1);
         
         JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
         AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
@@ -1135,7 +1187,7 @@ public class AcademicBenchmarksClient
      */
     private String getApiResponse(String list, String queryString, int offset, int limit) throws Exception
     {
-        return getApiResponse(AB_API_URL_V3, list, queryString, offset, limit);
+        return getApiResponse(AB_API_URL_V3, list, queryString, null, offset, limit);
     }
     
     /**
@@ -1148,7 +1200,7 @@ public class AcademicBenchmarksClient
      * @return
      * @throws Exception
      */
-    private String getApiResponse(String baseUrl, String list, String queryString, int offset, int limit) throws Exception
+    private String getApiResponse(String baseUrl, String list, String queryString, String fields, int offset, int limit) throws Exception
     {
         WebPost webPostUtil = new WebPost();
         
@@ -1161,6 +1213,11 @@ public class AcademicBenchmarksClient
         if(!StringUtil.isNullOrEmpty(list))
         {
             parameters.append("&list=" + list);
+        }
+        
+        if(!StringUtil.isNullOrEmpty(fields))
+        {
+            parameters.append("&fields=" + fields);
         }
         
         if(!StringUtil.isNullOrEmpty(queryString))
