@@ -2,8 +2,13 @@ package com.nfbsoftware.ab;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -985,6 +990,8 @@ public class AcademicBenchmarksClient
     public List<Standard> getStandardChildred(String parentGuid, int offset, int limit) throws Exception
     {
         List<Standard> standards = new ArrayList<Standard>();
+        List<String> standardCodes = new ArrayList<String>();
+        Map<String, Standard> standardsMap = new HashMap<String, Standard>();
         
         String queryString = "&parent=" + parentGuid;
         
@@ -1006,7 +1013,9 @@ public class AcademicBenchmarksClient
                     if(tmpData != null)
                     {
                         Standard standardModel = getStandard(tmpData.getGuid());
-                        standards.add(standardModel);
+                        
+                        standardsMap.put(tmpData.getGuid(), standardModel);
+                        standardCodes.add(StringUtil.replaceIfNull(standardModel.getNumber(), "AAA") + "|" + tmpData.getGuid());
                     }
                 }
             }
@@ -1014,6 +1023,19 @@ public class AcademicBenchmarksClient
             {
                 throw new Exception("Academic Benchmarks Error (" + apiStatus.getCode() + ") " + apiStatus.getCategory() + " - " + apiStatus.getEmsg());
             }
+        }
+        
+        // Sort the standard records
+        Collections.sort(standardCodes);
+        
+        // Loop through the objects to get the proper order by number
+        for (String key : standardCodes) 
+        { 
+            String standardGuid = StringUtil.split(key, "|")[1];
+            
+            Standard standardModel = standardsMap.get(standardGuid);
+            
+            standards.add(standardModel);
         }
         
         return standards;
