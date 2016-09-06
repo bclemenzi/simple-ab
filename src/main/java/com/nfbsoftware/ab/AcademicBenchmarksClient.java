@@ -1,5 +1,6 @@
 package com.nfbsoftware.ab;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -7,8 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -1195,6 +1194,92 @@ public class AcademicBenchmarksClient
     }
     
     /**
+     * Returns the number of results found for a given text search query with an authority
+     * 
+     * @param authorityCode
+     * @param searchText
+     * @return
+     * @throws Exception
+     */
+    public Long getSearchStandardsCount(String authorityCode, String searchText) throws Exception
+    {
+        Long searchResultCount = Long.valueOf(0);
+        
+        String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
+        
+        String queryString = "&authority=" + authorityCode + "&query=" + encodedSearchText;
+        
+        String apiResponse = getApiResponse("", queryString, 0, 1);
+        
+        JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
+        AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
+        
+        Status apiStatus = restApiResponse.getStatus();
+        
+        if(apiStatus != null)
+        {
+            if(apiStatus.getCode() == 200)
+            {
+                searchResultCount = Long.valueOf(restApiResponse.getCount());
+            }
+            else
+            {
+                throw new Exception("Academic Benchmarks Error (" + apiStatus.getCode() + ") " + apiStatus.getCategory() + " - " + apiStatus.getEmsg());
+            }
+        }
+        
+        return searchResultCount;
+    }
+    
+    /**
+     * Returns a list of standards for the search query within a given authority
+     * 
+     * @param authorityCode
+     * @param searchText
+     * @return
+     * @throws Exception
+     */
+    public List<Standard> getSearchStandards(String authorityCode, String searchText, int offset, int limit) throws Exception
+    {
+        List<Standard> standards = new ArrayList<Standard>();
+        
+        String encodedSearchText = URLEncoder.encode(searchText, "UTF-8");
+        
+        String queryString = "&authority=" + authorityCode + "&query=" + encodedSearchText;
+        
+        String apiResponse = getApiResponse("", queryString, offset, limit);
+        
+        JSONDeserializer<AbResponse> js = new JSONDeserializer<AbResponse>();
+        AbResponse restApiResponse = js.deserialize(apiResponse, AbResponse.class);
+        
+        Status apiStatus = restApiResponse.getStatus();
+        
+        if(apiStatus != null)
+        {
+            if(apiStatus.getCode() == 200)
+            {
+                for(AbResource tmpResource : restApiResponse.getResources())
+                {
+                    AbData tmpData = tmpResource.getData();
+                    
+                    if(tmpData != null)
+                    {
+                        Standard standardModel = getStandard(tmpData.getGuid());
+                        
+                        standards.add(standardModel);
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Academic Benchmarks Error (" + apiStatus.getCode() + ") " + apiStatus.getCategory() + " - " + apiStatus.getEmsg());
+            }
+        }
+        
+        return standards;
+    }
+    
+    /**
      * 
      * @param list
      * @param queryString
@@ -1245,6 +1330,7 @@ public class AcademicBenchmarksClient
         
         // Build the full API url for the transaction
         String fullApiUrl = baseUrl + "?" + createNewSignature() + parameters.toString();
+        //System.out.println(fullApiUrl);
         
         webPostUtil.secureConnect(fullApiUrl, "text/plain; charset=utf-8", "GET");
         

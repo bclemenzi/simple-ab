@@ -24,7 +24,7 @@ The easiest way to incorporate the library into your Java project is to use Mave
 <dependency>
     <groupId>com.nfbsoftware</groupId>
 	<artifactId>simple-ab</artifactId>
-	<version>1.0.12</version>
+	<version>1.0.13</version>
 </dependency>
 ```
 
@@ -397,6 +397,32 @@ private void processChildren(int level, Standard standardModel)
     for(Standard childStandard : standardModel.getStandards())
     {
         processChildren(level, childStandard);
+    }
+}
+```
+
+**Full text search of standards by authority**
+
+```java	
+public void testFullTextSearch() throws Exception
+{
+	String authorityCode = "OH";
+    String searchText = "conclusions";
+            
+    // Get the total number of records found by search.  This can be used for paging
+	Long standardCount = client.getSearchStandardsCount(authorityCode, searchText);
+	
+	// Get the first 10 records of the search query
+    List<Standard> standardModels = client.getSearchStandards(authorityCode, searchText, 0, 10);
+            
+	System.out.println("========> Total Search Results: " + standardCount);
+            
+   	if(standardModels != null)
+    {
+        for(Standard standardModel : standardModels)
+        {
+            System.out.println("========> " + standardModel.getNumber() + " (" + standardModel.getAuthorityCode() + ") " + standardModel.getDescr());
+        }
     }
 }
 ```
