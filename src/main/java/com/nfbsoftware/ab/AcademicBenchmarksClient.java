@@ -883,6 +883,54 @@ public class AcademicBenchmarksClient
     }
     
     /**
+     * 
+     * @param client
+     * @param childStandardModel
+     * @return
+     */
+    public Standard getTopLevelStandardByChild(Standard childStandardModel) throws Exception
+    {
+        if(childStandardModel.getLevel() == 1)
+        {
+            return childStandardModel;
+        }
+        else
+        {
+            Standard parentStandardModel = getTopParent(childStandardModel);
+            
+            return parentStandardModel;
+        }
+    }
+    
+    /**
+     * 
+     * @param standardModel
+     * @return
+     * @throws Exception
+     */
+    private Standard getTopParent(Standard standardModel) throws Exception
+    {
+        Standard parentStandardModel = getStandard(standardModel.getParentId());
+        
+        if(parentStandardModel.getLevel() > 1)
+        {
+            do 
+            {
+                parentStandardModel = getStandard(parentStandardModel.getParentId());
+                
+                System.out.println("parentStandardModel: " + parentStandardModel.getNumber() + "  Description: " + parentStandardModel.getDescr());
+            }
+            while(parentStandardModel.getLevel() > 1);
+        }
+        else
+        {
+            return parentStandardModel;
+        }
+        
+        return parentStandardModel;
+    }
+    
+    /**
      * Will return domain records with a Level value of 1
      * 
      * @param authorityCode
@@ -1084,7 +1132,13 @@ public class AcademicBenchmarksClient
                         standardModel.setStem(tmpData.getStem());
                         standardModel.setSeq(tmpData.getSeq());
                         standardModel.setExtended_descr(tmpData.getExtended_descr());
+                        standardModel.setLevel(tmpData.getLevel());
 
+                        if(tmpData.getParent() != null)
+                        {
+                            standardModel.setParentId(tmpData.getParent().getGuid());
+                        }
+                        
                         if(tmpData.getAuthority() != null)
                         {
                             standardModel.setAuthorityGuid(tmpData.getAuthority().getGuid());

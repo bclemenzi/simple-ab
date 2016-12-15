@@ -13,6 +13,7 @@ public class Standard implements Serializable
     private static final long serialVersionUID = 1L;
     
     private String m_id;
+    private String m_parentId;
     private String m_status;
     private String m_placeholder;
     private String m_guid;
@@ -27,6 +28,8 @@ public class Standard implements Serializable
     private String m_stem;
     private String m_seq;
     private String m_extended_descr;
+    
+    private int m_level;
 
     private String m_authorityGuid;
     private String m_authorityCode;
@@ -42,6 +45,15 @@ public class Standard implements Serializable
     
     private List<Standard> m_standards = new ArrayList<Standard>();
 
+    public String getParentId()
+    {
+        return m_parentId;
+    }
+    public void setParentId(String parentId)
+    {
+        m_parentId = parentId;
+    }
+    
     public String getStatus()
     {
         return m_status;
@@ -269,6 +281,15 @@ public class Standard implements Serializable
     public void setExtended_descr(String extended_descr)
     {
         m_extended_descr = extended_descr;
+    }
+    
+    public int getLevel()
+    {
+        return m_level;
+    }
+    public void setLevel(int level)
+    {
+        m_level = level;
     }
     
     public List<Standard> getStandards()

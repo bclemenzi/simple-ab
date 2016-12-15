@@ -37,6 +37,7 @@ public class AbData implements Serializable
     private Document m_document;
     private Subject m_subject;
     private SubjectDocument m_subject_doc;
+    private Parent m_parent;
 
     public String getStatus()
     {
@@ -229,6 +230,15 @@ public class AbData implements Serializable
     public void setSubject_doc(SubjectDocument subject_doc)
     {
         m_subject_doc = subject_doc;
+    }
+    
+    public Parent getParent()
+    {
+        return m_parent;
+    }
+    public void setParent(Parent parent)
+    {
+        m_parent = parent;
     }
     
     public String getDisplayName()
