@@ -890,7 +890,7 @@ public class AcademicBenchmarksClient
      */
     public Standard getTopLevelStandardByChild(Standard childStandardModel) throws Exception
     {
-        if(childStandardModel.getLevel() == 1)
+        if(childStandardModel.getStandardLevel() == 1)
         {
             return childStandardModel;
         }
@@ -912,7 +912,7 @@ public class AcademicBenchmarksClient
     {
         Standard parentStandardModel = getStandard(standardModel.getParentId());
         
-        if(parentStandardModel.getLevel() > 1)
+        if(parentStandardModel.getStandardLevel() > 1)
         {
             do 
             {
@@ -920,7 +920,7 @@ public class AcademicBenchmarksClient
                 
                 System.out.println("parentStandardModel: " + parentStandardModel.getNumber() + "  Description: " + parentStandardModel.getDescr());
             }
-            while(parentStandardModel.getLevel() > 1);
+            while(parentStandardModel.getStandardLevel() > 1);
         }
         else
         {
@@ -1132,7 +1132,7 @@ public class AcademicBenchmarksClient
                         standardModel.setStem(tmpData.getStem());
                         standardModel.setSeq(tmpData.getSeq());
                         standardModel.setExtended_descr(tmpData.getExtended_descr());
-                        standardModel.setLevel(tmpData.getLevel());
+                        standardModel.setStandardLevel(tmpData.getLevel());
 
                         if(tmpData.getParent() != null)
                         {

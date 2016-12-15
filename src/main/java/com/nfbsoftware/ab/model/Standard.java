@@ -29,7 +29,7 @@ public class Standard implements Serializable
     private String m_seq;
     private String m_extended_descr;
     
-    private int m_level;
+    private int m_standardLevel;
 
     private String m_authorityGuid;
     private String m_authorityCode;
@@ -283,13 +283,13 @@ public class Standard implements Serializable
         m_extended_descr = extended_descr;
     }
     
-    public int getLevel()
+    public int getStandardLevel()
     {
-        return m_level;
+        return m_standardLevel;
     }
-    public void setLevel(int level)
+    public void setStandardLevel(int standardLevel)
     {
-        m_level = level;
+        m_standardLevel = standardLevel;
     }
     
     public List<Standard> getStandards()
